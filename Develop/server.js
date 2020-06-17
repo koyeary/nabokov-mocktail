@@ -46,8 +46,8 @@ app.post('/api/notes', (req, res) => {
   var newNote = req.body;
 
   // Using a RegEx Pattern to remove spaces from newNote
-  newNote.routeName = newNote.name.replace(/\s+/g, "").toLowerCase();
-
+   newNote.title = newNote.name.replace(/\s+/g, "").toLowerCase();
+ 
   console.log(newNote);
 
   db.push(newNote);
