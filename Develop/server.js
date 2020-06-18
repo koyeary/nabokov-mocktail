@@ -4,12 +4,12 @@ const path = require('path');
 const db = require('../Develop/db/db.json');
 const fs = require('fs');
 
-const port = process.env.PORT || 8080; 
-const app = express(); 
+const port = process.env.PORT || 8080;
+const app = express();
 
 // Sets up the Express App
 app.use(express.urlencoded({ extended: true })); //handles data parsing
-app.use(express.json()); 
+app.use(express.json());
 
 //Route that sends the user to the homepage
 app.get('/', (req, res) => {
@@ -36,11 +36,11 @@ app.post('/api/notes', (req, res) => {
   res.json(newNote);
   db.push(newNote);
   let updateDb = JSON.stringify(db);
-  
-   fs.writeFile('../Develop/db/db.json', updateDb, function (err) {
+
+  fs.writeFile('../Develop/db/db.json', updateDb, function (err) {
     if (err) throw err;
     console.log("Saved!");
-  })  
+  })
 });
 
 app.get('/api/notes/:id', (req, res) => {
@@ -48,7 +48,7 @@ app.get('/api/notes/:id', (req, res) => {
   console.log(noteReq);
   for (var note of db) {
     if (note.id === noteReq) {
-     return res.send(note);
+      return res.send(note);
     }
   }
   res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
@@ -56,14 +56,21 @@ app.get('/api/notes/:id', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   const noteReq = parseInt(req.params.id);
-  res.send(`Got a DELETE request at /${noteReq}`)
-  /* console.log(noteReq);
-  for (var note of db) {
+
+  for (const [i, note] of db.entries()) {
     if (note.id === noteReq) {
-     return res.send(note);
+      db.splice(i, 1);
+      let updateDb = JSON.stringify(db);
+      fs.writeFile('../Develop/db/db.json', updateDb, function (err) {
+        if (err) throw err;
+        console.log("Saved!");
+      })
+      return res.send(db);
     }
+
   }
-  res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`); */
+  res.send(`Got a DELETE request at /${noteReq}`);
+  // res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
 });
 
 //Starts the server
