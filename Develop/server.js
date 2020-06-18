@@ -28,7 +28,7 @@ app.get('/api/notes', (req, res) => {
   return res.json(db);
 });
 
-app.get('api/notes/:note', (req, res) => {
+/* app.get('api/notes/:note', (req, res) => {
   const noteReq = req.params.note;
 
   //console.log(noteReq);
@@ -38,9 +38,9 @@ app.get('api/notes/:note', (req, res) => {
       return res.json(db[i]);
     }
     return res.json(false);
-  }
+  } 
 })
-
+ */
 //Creates new notes, takes in JSON input
 app.post('/api/notes', (req, res) => {
   let newNote = req.body;
@@ -57,7 +57,32 @@ app.post('/api/notes', (req, res) => {
     console.log("Saved!");
   })  
 });
- 
+
+app.get('/api/notes/:id', (req, res) => {
+  const noteReq = parseInt(req.params.id);
+  console.log(noteReq);
+  for (var note of db) {
+    if (note.id === noteReq) {
+     return res.send(note);
+    }
+  }
+  res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
+});
+  //res.end();
+/*   for (var i = 0; i < db.length; i++) {
+     if (noteReq === db[i].id) {
+       return console.log(db[i]);
+        res.send(db[i]);
+      return res.json(db[i]); 
+      
+    }
+    res.send(db[i]); 
+  } */
+ // res.status(404).send(`Sorry, we can't find that!`);  
+
+
+
+
 //Starts the server
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
