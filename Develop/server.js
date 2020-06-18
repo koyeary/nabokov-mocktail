@@ -9,6 +9,7 @@ const app = express();
 
 // Sets up the Express App
 app.use(express.urlencoded({ extended: true })); //handles data parsing
+app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
 //Route that sends the user to the homepage
@@ -69,8 +70,7 @@ app.delete('/api/notes/:id', (req, res) => {
     }
 
   }
-  res.send(`Got a DELETE request at /${noteReq}`);
-  // res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
+  res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
 });
 
 //Starts the server
