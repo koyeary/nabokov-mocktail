@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 // Sets up the Express App
-app.use(express.urlencoded({ extended: true })); //handles data parsing
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
@@ -30,13 +30,16 @@ app.get('/api/notes', (req, res) => {
 });
 
 
-//Creates new notes, takes in JSON input
+//Takes in user input as saves note to JSON
 app.post('/api/notes', (req, res) => {
   let note = req.body;
-  //generate a random number and add it to the note object
+
+  //generate a timestamp that will act as a unique object "id" (almost impossible to duplicate)
   let id = Number(new Date());
   note.id = id;
   res.json(note);
+
+  //refresh the JSON
   db.push(note);
   let updateDb = JSON.stringify(db);
 
