@@ -46,6 +46,7 @@ app.post('/api/notes', (req, res) => {
   })
 });
 
+/* //Allows you to search for a note by 
 app.get('/api/notes/:id', (req, res) => {
   const noteReq = parseInt(req.params.id);
   console.log(noteReq);
@@ -55,7 +56,7 @@ app.get('/api/notes/:id', (req, res) => {
     }
   }
   res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
-});
+}); */
 
 app.delete('/api/notes/:id', (req, res) => {
   const noteReq = parseInt(req.params.id);
@@ -72,7 +73,7 @@ app.delete('/api/notes/:id', (req, res) => {
     }
 
   }
-  res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
+  res.status(404).send(`We can't find a note matching #${noteReq}, or something else went wrong.`);
 });
 
 //Starts the server
