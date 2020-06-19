@@ -32,10 +32,12 @@ app.get('/api/notes', (req, res) => {
 
 //Creates new notes, takes in JSON input
 app.post('/api/notes', (req, res) => {
-  let newNote = req.body;
-
-  res.json(newNote);
-  db.push(newNote);
+  let note = req.body;
+  //generate a random number and add it to the note object
+  let generateId = Math.floor(Math.random() * 10000);
+  note.id = generateId;
+  res.json(note);
+  db.push(note);
   let updateDb = JSON.stringify(db);
 
   fs.writeFile('../Develop/db/db.json', updateDb, function (err) {
@@ -77,4 +79,7 @@ app.delete('/api/notes/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
 });
+
+
+
 
