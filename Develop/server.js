@@ -34,8 +34,8 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   let note = req.body;
   //generate a random number and add it to the note object
-  let generateId = Math.floor(Math.random() * 10000);
-  note.id = generateId;
+  let id = Number(new Date());
+  note.id = id;
   res.json(note);
   db.push(note);
   let updateDb = JSON.stringify(db);
@@ -45,18 +45,6 @@ app.post('/api/notes', (req, res) => {
     console.log("Saved!");
   })
 });
-
-/* //Allows you to search for a note by 
-app.get('/api/notes/:id', (req, res) => {
-  const noteReq = parseInt(req.params.id);
-  console.log(noteReq);
-  for (var note of db) {
-    if (note.id === noteReq) {
-      return res.send(note);
-    }
-  }
-  res.status(404).send(`Sorry, we can't find a note matching ID #${noteReq}`);
-}); */
 
 app.delete('/api/notes/:id', (req, res) => {
   const noteReq = parseInt(req.params.id);
