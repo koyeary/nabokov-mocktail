@@ -34,12 +34,12 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   let note = req.body;
 
-  //generate a timestamp that will act as a unique object "id" (almost impossible to duplicate)
+  //Generate a timestamp that will act as a unique object "id." This method is less likely to produce duplicate ids than a Math.random generator (without a function that checks for duplicates). Probably not necessary, but let's say someone writes 100,000 notes--it could happen.)
   let id = Number(new Date());
   note.id = id;
   res.json(note);
 
-  //refresh the JSON
+  //update the JSON
   db.push(note);
   let updateDb = JSON.stringify(db);
 
@@ -49,6 +49,7 @@ app.post('/api/notes', (req, res) => {
   })
 });
 
+//Route that handles delete requests
 app.delete('/api/notes/:id', (req, res) => {
   const noteReq = parseInt(req.params.id);
 
