@@ -1,33 +1,16 @@
 # nabokov-mocktail
 
 ## Description
-Note-Taker is a simple application that can be used to write, save, and delete notes. It uses an express backend and saves and retrieves note data from a JSON file.
+Note-Taker is a simple application that can be used to write, save, and delete notes. It uses an express backend and saves and retrieves note-data from a JSON file.
+
+You can check out a video of the working application here:
+https://drive.google.com/file/d/15PiZJnew0CH9tcHCXsot_JMSlbmNj1wj/view
 
 
-The application frontend has already been created, it's your job to build the backend and connect the two.
+# dependencies
+node
+npm install
+npm install express
 
-
-The following HTML routes should be created:
-
-
-GET /notes - Should return the notes.html file. ***
-
-
-GET * - Should return the index.html file ***
-
-
-
-
-The application should have a db.json file on the backend that will be used to store and retrieve notes using the fs module.
-
-
-The following API routes should be created:
-
-
-GET /api/notes - Should read the db.json file and return all saved notes as JSON.
-
-
-POST /api/notes - Should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client.
-
-
-DELETE /api/notes/:id - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique id when it's saved. In order to delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
+# server at localhost:8080
+node server.js
