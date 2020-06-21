@@ -9,7 +9,9 @@ https://drive.google.com/file/d/15PiZJnew0CH9tcHCXsot_JMSlbmNj1wj/view
 
 # dependencies
 node
+
 npm install
+
 npm install express
 
 # server at localhost:8080
