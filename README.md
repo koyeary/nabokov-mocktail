@@ -6,6 +6,9 @@ Note-Taker is a simple application that can be used to write, save, and delete n
 You can check out a video of the working application here:
 https://drive.google.com/file/d/15PiZJnew0CH9tcHCXsot_JMSlbmNj1wj/view
 
+And you can also find the app on heroku:
+https://stormy-caverns-51475.herokuapp.com/
+
 
 # dependencies
 node
